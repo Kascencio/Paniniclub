@@ -2,6 +2,32 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import menuImage from "@/assets/menu-grid.jpg";
 
+// Panini images
+import bostonImg from "@/assets/menu/panini-boston.jpg";
+import lyonImg from "@/assets/menu/panini-lyon.jpg";
+import barcelonaImg from "@/assets/menu/panini-barcelona.jpg";
+import madagascarImg from "@/assets/menu/panini-madagascar.jpg";
+import napolesImg from "@/assets/menu/panini-napoles.jpg";
+import tresQuesosImg from "@/assets/menu/panini-tres-quesos.jpg";
+import monterreyImg from "@/assets/menu/panini-monterrey.jpg";
+import sonoraImg from "@/assets/menu/panini-sonora.jpg";
+
+// Pepito images
+import fileteImg from "@/assets/menu/pepito-filete.jpg";
+import choriquesImg from "@/assets/menu/pepito-choriqueso.jpg";
+import jamonQuesoImg from "@/assets/menu/pepito-jamon-queso.jpg";
+
+// Pita images
+import buenosAiresImg from "@/assets/menu/pita-buenos-aires.jpg";
+import mexicoImg from "@/assets/menu/pita-mexico.jpg";
+import montrealImg from "@/assets/menu/pita-montreal.jpg";
+import quesadillaImg from "@/assets/menu/pita-quesadilla.jpg";
+import texasImg from "@/assets/menu/pita-texas.jpg";
+
+// Ensalada images
+import coobyImg from "@/assets/menu/ensalada-cooby.jpg";
+import frenchyImg from "@/assets/menu/ensalada-frenchy.jpg";
+
 export const MenuPreview = () => {
   const categories = [
     { name: "Paninis", count: 8 },
@@ -17,41 +43,49 @@ export const MenuPreview = () => {
         name: "Boston",
         description: "Jamón de pavo, queso crema, mayo de mostaza antigua, lechuga, jitomate y cebolla",
         badge: "Clásico",
+        image: bostonImg,
       },
       {
         name: "Lyon",
         description: "Jamón de pierna, salami, queso manchego, mayo de ajo y mostaza antigua",
         badge: "",
+        image: lyonImg,
       },
       {
         name: "Barcelona",
         description: "Jamón serrano, queso gouda, mayo de mostaza antigua, lechuga, jitomate",
         badge: "",
+        image: barcelonaImg,
       },
       {
         name: "Madagascar",
         description: "Manchego, cheddar, cabra, jamón de pavo, mayo de tomate deshidratado y aguacate",
         badge: "",
+        image: madagascarImg,
       },
       {
         name: "Nápoles",
         description: "Pechuga de pollo al pesto, queso manchego, costra de parmesano",
         badge: "Popular",
+        image: napolesImg,
       },
       {
         name: "Tres Quesos",
         description: "Manchego, cheddar, cabra, mayo de tomate deshidratado",
         badge: "Vegetariano",
+        image: tresQuesosImg,
       },
       {
         name: "Monterrey",
         description: "Filete de res, cheddar, monterrey jack, frijoles refritos, mayo de chipotle",
         badge: "",
+        image: monterreyImg,
       },
       {
         name: "Sonora",
         description: "Pollo adobado, aguacate, jocoque, salsa ranchera, mayo de chipotle",
         badge: "Picoso",
+        image: sonoraImg,
       },
     ],
     pepitos: [
@@ -59,16 +93,19 @@ export const MenuPreview = () => {
         name: "Filete",
         description: "Fajitas de res, queso Oaxaca, frijoles, aguacate, mayo de tomate",
         badge: "",
+        image: fileteImg,
       },
       {
         name: "Choriqueso",
         description: "Chorizo español, queso Oaxaca, frijoles, aguacate",
         badge: "Intenso",
+        image: choriquesImg,
       },
       {
         name: "Jamón y Queso",
         description: "Jamón de pavo, queso crema, aguacate, lechuga, jitomate",
         badge: "Clásico",
+        image: jamonQuesoImg,
       },
     ],
     pitas: [
@@ -76,26 +113,31 @@ export const MenuPreview = () => {
         name: "Buenos Aires",
         description: "Manchego, cheddar, cabra, jamón de pavo, aguacate, mayo de tomate",
         badge: "",
+        image: buenosAiresImg,
       },
       {
         name: "México",
         description: "Pollo adobado, aguacate, jocoque, salsa ranchera, mayo de chipotle",
         badge: "Picoso",
+        image: mexicoImg,
       },
       {
         name: "Montreal",
         description: "Pollo al pesto, miel, jocoque, mostaza dulce, mayo de chipotle",
         badge: "Dulce",
+        image: montrealImg,
       },
       {
         name: "Quesadilla Pita",
         description: "Manchego, cheddar y cabra",
         badge: "Vegetariano",
+        image: quesadillaImg,
       },
       {
         name: "Texas",
         description: "Filete de res, cheddar, monterrey jack, frijoles, mayo de chipotle",
         badge: "",
+        image: texasImg,
       },
     ],
     ensaladas: [
@@ -103,11 +145,13 @@ export const MenuPreview = () => {
         name: "Cooby",
         description: "Lechuga sangría, pollo adobado, cabra, aguacate, cherry, vinagreta casera",
         badge: "Favorita",
+        image: coobyImg,
       },
       {
         name: "Frenchy",
         description: "Lechuga sangría, cabra, mandarina, arándano, almendra, vinagreta de frutos",
         badge: "Vegetariana",
+        image: frenchyImg,
       },
     ],
   };
@@ -150,29 +194,36 @@ export const MenuPreview = () => {
               {menuItems.paninis.map((item, index) => (
                 <div
                   key={item.name}
-                  className="bg-card rounded-2xl p-6 hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
+                  className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <h4 className="font-display text-2xl text-card-foreground">{item.name}</h4>
-                    {item.badge && (
-                      <Badge
-                        variant="secondary"
-                        className={
-                          item.badge === "Vegetariano"
-                            ? "bg-accent/20 text-accent border-accent/30"
-                            : item.badge === "Popular"
-                            ? "bg-primary/20 text-primary border-primary/30"
-                            : item.badge === "Picoso"
-                            ? "bg-red-500/20 text-red-500 border-red-500/30"
-                            : ""
-                        }
-                      >
-                        {item.badge}
-                      </Badge>
-                    )}
+                  <img 
+                    src={item.image} 
+                    alt={item.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-display text-2xl text-card-foreground">{item.name}</h4>
+                      {item.badge && (
+                        <Badge
+                          variant="secondary"
+                          className={
+                            item.badge === "Vegetariano"
+                              ? "bg-accent/20 text-accent border-accent/30"
+                              : item.badge === "Popular"
+                              ? "bg-primary/20 text-primary border-primary/30"
+                              : item.badge === "Picoso"
+                              ? "bg-red-500/20 text-red-500 border-red-500/30"
+                              : ""
+                          }
+                        >
+                          {item.badge}
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-card-foreground/70 text-sm">{item.description}</p>
                   </div>
-                  <p className="text-card-foreground/70 text-sm">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -187,21 +238,28 @@ export const MenuPreview = () => {
               {menuItems.pepitos.map((item, index) => (
                 <div
                   key={item.name}
-                  className="bg-card rounded-2xl p-6 hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
+                  className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <h4 className="font-display text-2xl text-card-foreground">{item.name}</h4>
-                    {item.badge && (
-                      <Badge
-                        variant="secondary"
-                        className={item.badge === "Intenso" ? "bg-primary/20 text-primary border-primary/30" : ""}
-                      >
-                        {item.badge}
-                      </Badge>
-                    )}
+                  <img 
+                    src={item.image} 
+                    alt={item.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-display text-2xl text-card-foreground">{item.name}</h4>
+                      {item.badge && (
+                        <Badge
+                          variant="secondary"
+                          className={item.badge === "Intenso" ? "bg-primary/20 text-primary border-primary/30" : ""}
+                        >
+                          {item.badge}
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-card-foreground/70 text-sm">{item.description}</p>
                   </div>
-                  <p className="text-card-foreground/70 text-sm">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -216,29 +274,36 @@ export const MenuPreview = () => {
               {menuItems.pitas.map((item, index) => (
                 <div
                   key={item.name}
-                  className="bg-card rounded-2xl p-6 hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
+                  className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <h4 className="font-display text-2xl text-card-foreground">{item.name}</h4>
-                    {item.badge && (
-                      <Badge
-                        variant="secondary"
-                        className={
-                          item.badge === "Vegetariano"
-                            ? "bg-accent/20 text-accent border-accent/30"
-                            : item.badge === "Picoso"
-                            ? "bg-red-500/20 text-red-500 border-red-500/30"
-                            : item.badge === "Dulce"
-                            ? "bg-amber-500/20 text-amber-500 border-amber-500/30"
-                            : ""
-                        }
-                      >
-                        {item.badge}
-                      </Badge>
-                    )}
+                  <img 
+                    src={item.image} 
+                    alt={item.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-display text-2xl text-card-foreground">{item.name}</h4>
+                      {item.badge && (
+                        <Badge
+                          variant="secondary"
+                          className={
+                            item.badge === "Vegetariano"
+                              ? "bg-accent/20 text-accent border-accent/30"
+                              : item.badge === "Picoso"
+                              ? "bg-red-500/20 text-red-500 border-red-500/30"
+                              : item.badge === "Dulce"
+                              ? "bg-amber-500/20 text-amber-500 border-amber-500/30"
+                              : ""
+                          }
+                        >
+                          {item.badge}
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-card-foreground/70 text-sm">{item.description}</p>
                   </div>
-                  <p className="text-card-foreground/70 text-sm">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -253,23 +318,30 @@ export const MenuPreview = () => {
               {menuItems.ensaladas.map((item, index) => (
                 <div
                   key={item.name}
-                  className="bg-card rounded-2xl p-8 hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
+                  className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <h4 className="font-display text-3xl text-card-foreground">{item.name}</h4>
-                    <Badge
-                      variant="secondary"
-                      className={
-                        item.badge === "Favorita"
-                          ? "bg-primary/20 text-primary border-primary/30"
-                          : "bg-accent/20 text-accent border-accent/30"
-                      }
-                    >
-                      {item.badge}
-                    </Badge>
+                  <img 
+                    src={item.image} 
+                    alt={item.name}
+                    className="w-full h-56 object-cover"
+                  />
+                  <div className="p-8">
+                    <div className="flex items-start justify-between mb-4">
+                      <h4 className="font-display text-3xl text-card-foreground">{item.name}</h4>
+                      <Badge
+                        variant="secondary"
+                        className={
+                          item.badge === "Favorita"
+                            ? "bg-primary/20 text-primary border-primary/30"
+                            : "bg-accent/20 text-accent border-accent/30"
+                        }
+                      >
+                        {item.badge}
+                      </Badge>
+                    </div>
+                    <p className="text-card-foreground/70">{item.description}</p>
                   </div>
-                  <p className="text-card-foreground/70">{item.description}</p>
                 </div>
               ))}
             </div>
