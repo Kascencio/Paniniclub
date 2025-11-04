@@ -4,32 +4,113 @@ import menuImage from "@/assets/menu-grid.jpg";
 
 export const MenuPreview = () => {
   const categories = [
-    { name: "Clásicos", count: 8 },
-    { name: "Premium", count: 6 },
-    { name: "Vegetarianos", count: 5 },
-    { name: "Especiales", count: 4 },
+    { name: "Paninis", count: 8 },
+    { name: "Pepitos", count: 3 },
+    { name: "Pitas", count: 5 },
+    { name: "Ensaladas", count: 2 },
+    { name: "Bebidas", count: 8 },
   ];
 
-  const featuredItems = [
-    {
-      name: "Club Italiano",
-      description: "Salami, jamón serrano, queso provolone, tomate y albahaca fresca",
-      price: "$125",
-      badge: "Más Vendido",
-    },
-    {
-      name: "Pesto Chicken",
-      description: "Pollo a la parrilla, pesto casero, queso mozzarella y pimientos",
-      price: "$135",
-      badge: "Nuevo",
-    },
-    {
-      name: "Veggie Deluxe",
-      description: "Verduras asadas, queso de cabra, rúcula y vinagreta balsámica",
-      price: "$115",
-      badge: "Vegetariano",
-    },
-  ];
+  const menuItems = {
+    paninis: [
+      {
+        name: "Boston",
+        description: "Jamón de pavo, queso crema, mayo de mostaza antigua, lechuga, jitomate y cebolla",
+        badge: "Clásico",
+      },
+      {
+        name: "Lyon",
+        description: "Jamón de pierna, salami, queso manchego, mayo de ajo y mostaza antigua",
+        badge: "",
+      },
+      {
+        name: "Barcelona",
+        description: "Jamón serrano, queso gouda, mayo de mostaza antigua, lechuga, jitomate",
+        badge: "",
+      },
+      {
+        name: "Madagascar",
+        description: "Manchego, cheddar, cabra, jamón de pavo, mayo de tomate deshidratado y aguacate",
+        badge: "",
+      },
+      {
+        name: "Nápoles",
+        description: "Pechuga de pollo al pesto, queso manchego, costra de parmesano",
+        badge: "Popular",
+      },
+      {
+        name: "Tres Quesos",
+        description: "Manchego, cheddar, cabra, mayo de tomate deshidratado",
+        badge: "Vegetariano",
+      },
+      {
+        name: "Monterrey",
+        description: "Filete de res, cheddar, monterrey jack, frijoles refritos, mayo de chipotle",
+        badge: "",
+      },
+      {
+        name: "Sonora",
+        description: "Pollo adobado, aguacate, jocoque, salsa ranchera, mayo de chipotle",
+        badge: "Picoso",
+      },
+    ],
+    pepitos: [
+      {
+        name: "Filete",
+        description: "Fajitas de res, queso Oaxaca, frijoles, aguacate, mayo de tomate",
+        badge: "",
+      },
+      {
+        name: "Choriqueso",
+        description: "Chorizo español, queso Oaxaca, frijoles, aguacate",
+        badge: "Intenso",
+      },
+      {
+        name: "Jamón y Queso",
+        description: "Jamón de pavo, queso crema, aguacate, lechuga, jitomate",
+        badge: "Clásico",
+      },
+    ],
+    pitas: [
+      {
+        name: "Buenos Aires",
+        description: "Manchego, cheddar, cabra, jamón de pavo, aguacate, mayo de tomate",
+        badge: "",
+      },
+      {
+        name: "México",
+        description: "Pollo adobado, aguacate, jocoque, salsa ranchera, mayo de chipotle",
+        badge: "Picoso",
+      },
+      {
+        name: "Montreal",
+        description: "Pollo al pesto, miel, jocoque, mostaza dulce, mayo de chipotle",
+        badge: "Dulce",
+      },
+      {
+        name: "Quesadilla Pita",
+        description: "Manchego, cheddar y cabra",
+        badge: "Vegetariano",
+      },
+      {
+        name: "Texas",
+        description: "Filete de res, cheddar, monterrey jack, frijoles, mayo de chipotle",
+        badge: "",
+      },
+    ],
+    ensaladas: [
+      {
+        name: "Cooby",
+        description: "Lechuga sangría, pollo adobado, cabra, aguacate, cherry, vinagreta casera",
+        badge: "Favorita",
+      },
+      {
+        name: "Frenchy",
+        description: "Lechuga sangría, cabra, mandarina, arándano, almendra, vinagreta de frutos",
+        badge: "Vegetariana",
+      },
+    ],
+  };
 
   return (
     <section id="menu" className="py-20 md:py-32 bg-background">
@@ -57,52 +138,171 @@ export const MenuPreview = () => {
           ))}
         </div>
 
-        {/* Featured Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          {/* Image */}
-          <div className="relative group">
-            <div className="absolute inset-0 bg-primary/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all" />
-            <img
-              src={menuImage}
-              alt="Paninis variety"
-              className="relative rounded-3xl shadow-2xl hover-lift"
-            />
+        {/* Menu Sections */}
+        <div className="space-y-20 mb-16">
+          {/* Paninis */}
+          <div>
+            <h3 className="font-display text-4xl md:text-5xl text-center mb-4 text-foreground">
+              PANINIS <span className="text-muted-foreground text-2xl">(en focaccia)</span>
+            </h3>
+            <p className="text-center text-muted-foreground mb-10">Focaccia de arándano, tocino u orégano</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {menuItems.paninis.map((item, index) => (
+                <div
+                  key={item.name}
+                  className="bg-card rounded-2xl p-6 hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-display text-2xl text-card-foreground">{item.name}</h4>
+                    {item.badge && (
+                      <Badge
+                        variant="secondary"
+                        className={
+                          item.badge === "Vegetariano"
+                            ? "bg-accent/20 text-accent border-accent/30"
+                            : item.badge === "Popular"
+                            ? "bg-primary/20 text-primary border-primary/30"
+                            : item.badge === "Picoso"
+                            ? "bg-red-500/20 text-red-500 border-red-500/30"
+                            : ""
+                        }
+                      >
+                        {item.badge}
+                      </Badge>
+                    )}
+                  </div>
+                  <p className="text-card-foreground/70 text-sm">{item.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Items List */}
-          <div className="space-y-6">
-            {featuredItems.map((item, index) => (
-              <div
-                key={item.name}
-                className="bg-card rounded-2xl p-6 hover-lift shadow-[var(--shadow-card)] animate-in fade-in slide-in-from-right-5 duration-700"
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h3 className="font-display text-2xl text-card-foreground mb-1">
-                      {item.name}
-                    </h3>
+          {/* Pepitos */}
+          <div>
+            <h3 className="font-display text-4xl md:text-5xl text-center mb-4 text-foreground">
+              PEPITOS <span className="text-muted-foreground text-2xl">(tortas con pan de la casa)</span>
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {menuItems.pepitos.map((item, index) => (
+                <div
+                  key={item.name}
+                  className="bg-card rounded-2xl p-6 hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-display text-2xl text-card-foreground">{item.name}</h4>
+                    {item.badge && (
+                      <Badge
+                        variant="secondary"
+                        className={item.badge === "Intenso" ? "bg-primary/20 text-primary border-primary/30" : ""}
+                      >
+                        {item.badge}
+                      </Badge>
+                    )}
+                  </div>
+                  <p className="text-card-foreground/70 text-sm">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Pitas */}
+          <div>
+            <h3 className="font-display text-4xl md:text-5xl text-center mb-4 text-foreground">
+              PITAS <span className="text-muted-foreground text-2xl">(tipo wrap)</span>
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {menuItems.pitas.map((item, index) => (
+                <div
+                  key={item.name}
+                  className="bg-card rounded-2xl p-6 hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-display text-2xl text-card-foreground">{item.name}</h4>
+                    {item.badge && (
+                      <Badge
+                        variant="secondary"
+                        className={
+                          item.badge === "Vegetariano"
+                            ? "bg-accent/20 text-accent border-accent/30"
+                            : item.badge === "Picoso"
+                            ? "bg-red-500/20 text-red-500 border-red-500/30"
+                            : item.badge === "Dulce"
+                            ? "bg-amber-500/20 text-amber-500 border-amber-500/30"
+                            : ""
+                        }
+                      >
+                        {item.badge}
+                      </Badge>
+                    )}
+                  </div>
+                  <p className="text-card-foreground/70 text-sm">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Ensaladas */}
+          <div>
+            <h3 className="font-display text-4xl md:text-5xl text-center mb-10 text-foreground">
+              ENSALADAS
+            </h3>
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {menuItems.ensaladas.map((item, index) => (
+                <div
+                  key={item.name}
+                  className="bg-card rounded-2xl p-8 hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <h4 className="font-display text-3xl text-card-foreground">{item.name}</h4>
                     <Badge
-                      variant={item.badge === "Nuevo" ? "default" : "secondary"}
+                      variant="secondary"
                       className={
-                        item.badge === "Más Vendido"
+                        item.badge === "Favorita"
                           ? "bg-primary/20 text-primary border-primary/30"
-                          : item.badge === "Vegetariano"
-                          ? "bg-accent/20 text-accent border-accent/30"
-                          : ""
+                          : "bg-accent/20 text-accent border-accent/30"
                       }
                     >
                       {item.badge}
                     </Badge>
                   </div>
-                  <span className="font-display text-2xl text-primary">{item.price}</span>
+                  <p className="text-card-foreground/70">{item.description}</p>
                 </div>
-                <p className="text-card-foreground/80 mb-4">{item.description}</p>
-                <Button size="sm" variant="outline" className="w-full border-2">
-                  Agregar al Carrito
-                </Button>
+              ))}
+            </div>
+          </div>
+
+          {/* Bebidas */}
+          <div>
+            <h3 className="font-display text-4xl md:text-5xl text-center mb-10 text-foreground">
+              BEBIDAS
+            </h3>
+            <div className="max-w-3xl mx-auto bg-card rounded-2xl p-8 shadow-[var(--shadow-card)]">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h4 className="font-display text-2xl text-card-foreground mb-4">Refrescos 355ml</h4>
+                  <ul className="space-y-2 text-card-foreground/70">
+                    <li>• Coca-Cola</li>
+                    <li>• Coca-Cola Light</li>
+                    <li>• Sidral Mundet</li>
+                    <li>• Sprite</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-display text-2xl text-card-foreground mb-4">Aguas</h4>
+                  <ul className="space-y-2 text-card-foreground/70">
+                    <li>• Natural 600ml (Ciel)</li>
+                    <li>• Maracuyá 700ml</li>
+                    <li>• Horchata 700ml</li>
+                    <li>• Jamaica 700ml</li>
+                    <li>• Limón-Chía 700ml</li>
+                  </ul>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
 

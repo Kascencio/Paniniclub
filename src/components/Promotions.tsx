@@ -6,23 +6,9 @@ export const Promotions = () => {
   const promos = [
     {
       title: "Martes de 2x1",
-      description: "Compra un panini y llévate otro completamente gratis",
-      discount: "50% OFF",
+      description: "Compra un panini y llévate otro completamente gratis. Válido todos los martes en todos nuestros productos.",
+      discount: "2x1",
       icon: Percent,
-      color: "primary",
-    },
-    {
-      title: "Happy Hour",
-      description: "De 2pm a 4pm todos los días obtén 20% de descuento",
-      discount: "20% OFF",
-      icon: Clock,
-      color: "accent",
-    },
-    {
-      title: "Combo del Día",
-      description: "Panini + Bebida + Papas por solo $149",
-      discount: "$149",
-      icon: Calendar,
       color: "primary",
     },
   ];
@@ -44,7 +30,7 @@ export const Promotions = () => {
         </div>
 
         {/* Promotions Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-1 gap-8 mb-16 max-w-2xl mx-auto">
           {promos.map((promo, index) => (
             <div
               key={promo.title}
@@ -85,37 +71,6 @@ export const Promotions = () => {
           ))}
         </div>
 
-        {/* Featured Promo Banner */}
-        <div className="bg-card rounded-3xl overflow-hidden shadow-2xl grid md:grid-cols-2 gap-8 items-center">
-          <div className="p-8 md:p-12">
-            <span className="inline-block bg-accent/20 text-accent px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              OFERTA LIMITADA
-            </span>
-            <h3 className="font-display text-4xl md:text-5xl text-card-foreground mb-4">
-              PRUEBA NUESTRO NUEVO <span className="text-primary">PANINI PREMIUM</span>
-            </h3>
-            <p className="text-card-foreground/80 text-lg mb-6">
-              Ingredientes importados de Italia con un descuento especial de lanzamiento
-            </p>
-            <div className="flex items-baseline gap-4 mb-6">
-              <span className="font-display text-5xl text-primary">$139</span>
-              <span className="text-2xl line-through text-muted-foreground">$179</span>
-              <span className="bg-accent/20 text-accent px-3 py-1 rounded-full text-sm font-bold">
-                -22%
-              </span>
-            </div>
-            <Button size="lg" className="font-display text-lg">
-              ORDENAR AHORA
-            </Button>
-          </div>
-          <div className="relative h-full min-h-[400px]">
-            <img
-              src={promoImage}
-              alt="Promo panini"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-        </div>
       </div>
     </section>
   );
