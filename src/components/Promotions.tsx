@@ -14,17 +14,17 @@ export const Promotions = () => {
   ];
 
   return (
-    <section id="promociones" className="py-20 md:py-32 relative overflow-hidden">
+    <section id="promociones" className="py-12 md:py-20 lg:py-32 relative overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="font-display text-5xl md:text-7xl mb-6 text-foreground">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl mb-4 md:mb-6 text-foreground">
             <span className="text-gradient">PROMOCIONES</span> ESPECIALES
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Aprovecha nuestras ofertas exclusivas y disfruta más por menos
           </p>
         </div>

@@ -25,22 +25,22 @@ export const Footer = () => {
 
   return (
     <footer id="contacto" className="bg-background border-t border-border">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-12 md:py-16">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <img src={logo} alt="Panini Club" className="h-16 w-16" />
-            <h2 className="font-display text-4xl text-foreground">
+        <div className="text-center mb-8 md:mb-12">
+          <div className="flex items-center justify-center gap-2 md:gap-3 mb-3 md:mb-4">
+            <img src={logo} alt="Panini Club" className="h-12 w-12 md:h-16 md:w-16" />
+            <h2 className="font-display text-3xl md:text-4xl text-foreground">
               PANINI <span className="text-primary">CLUB</span>
             </h2>
           </div>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-base md:text-lg">
             La mejor experiencia en paninis artesanales
           </p>
         </div>
 
         {/* Locations Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
           {locations.map((location) => (
             <div
               key={location.name}

@@ -39,14 +39,14 @@ export const DeliverySection = () => {
   ];
 
   return (
-    <section id="ubicaciones" className="py-20 md:py-32 bg-muted/20">
+    <section id="ubicaciones" className="py-12 md:py-20 lg:py-32 bg-muted/20">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="font-display text-5xl md:text-7xl mb-6 text-foreground">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl mb-4 md:mb-6 text-foreground">
             <span className="text-gradient">DELIVERY</span> A TU PUERTA
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Disfruta de nuestros paninis sin salir de casa. Ordena ahora a través de tus apps favoritas.
           </p>
         </div>
