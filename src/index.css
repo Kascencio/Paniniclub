@@ -8,8 +8,8 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Panini Club Brand Colors */
-    --brand-primary: 28 85% 52%; /* #EA9020 - Orange */
+    /* Panini Club Brand Colors - Naranja vibrante #FF8C00 */
+    --brand-primary: 30 100% 50%; /* #FF8C00 - Vibrant Orange */
     --brand-accent: 162 100% 38%; /* #00C389 - Green */
     
     --background: 0 0% 5.5%; /* #0E0E0E - Dark base */
@@ -21,7 +21,7 @@ All colors MUST be HSL.
     --popover: 0 0% 5.5%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 28 85% 52%; /* Brand Orange */
+    --primary: 30 100% 50%; /* Brand Orange #FF8C00 */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 96%; /* Soft background */
@@ -38,16 +38,19 @@ All colors MUST be HSL.
 
     --border: 0 0% 100% / 0.14; /* border-soft-dark */
     --input: 0 0% 20%;
-    --ring: 28 85% 52%;
+    --ring: 30 100% 50%;
 
     --radius: 0.75rem;
 
+    /* Kraft Paper Beige for backgrounds */
+    --kraft-beige: 37 25% 92%; /* #EBE6DB - Kraft paper color */
+
     /* Custom tokens */
-    --gradient-hero: linear-gradient(135deg, hsl(28 85% 52%) 0%, hsl(28 95% 62%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(30 100% 50%) 0%, hsl(30 100% 60%) 100%);
     --gradient-dark: linear-gradient(180deg, hsl(0 0% 5.5%) 0%, hsl(0 0% 8%) 100%);
-    --gradient-hover: linear-gradient(135deg, hsl(28 95% 62%) 0%, hsl(28 100% 70%) 100%);
-    --shadow-glow: 0 10px 40px hsl(28 85% 52% / 0.3);
-    --shadow-glow-hover: 0 15px 50px hsl(28 85% 52% / 0.5);
+    --gradient-hover: linear-gradient(135deg, hsl(30 100% 60%) 0%, hsl(30 100% 70%) 100%);
+    --shadow-glow: 0 10px 40px hsl(30 100% 50% / 0.3);
+    --shadow-glow-hover: 0 15px 50px hsl(30 100% 50% / 0.5);
     --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.15);
   }
 }
@@ -71,6 +74,27 @@ All colors MUST be HSL.
     @apply bg-gradient-to-r from-primary to-amber-500 bg-clip-text text-transparent;
   }
 
+  /* Script/Handwritten font style for category titles */
+  .font-script {
+    font-family: 'Dancing Script', 'Brush Script MT', cursive;
+    font-weight: 700;
+  }
+
+  .bg-kraft {
+    background-color: hsl(var(--kraft-beige));
+  }
+
+  .bg-kraft-pattern {
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 35px,
+        hsl(var(--kraft-beige) / 0.1) 35px,
+        hsl(var(--kraft-beige) / 0.1) 36px
+      );
+  }
+
   .animate-float {
     animation: float 3s ease-in-out infinite;
   }
@@ -86,5 +110,62 @@ All colors MUST be HSL.
 
   .hover-lift {
     @apply transition-transform duration-300 hover:-translate-y-2;
+  }
+
+  /* Pattern background for sections */
+  .pattern-panini {
+    background-image: 
+      radial-gradient(circle at 2px 2px, hsl(var(--primary) / 0.05) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+
+  /* Scroll animations */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Infinite scroll animations for testimonials gallery */
+  @keyframes scroll-vertical {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+  
+  .animate-scroll-vertical {
+    animation: scroll-vertical 60s linear infinite;
+  }
+  
+  .animate-scroll-vertical-delayed {
+    animation: scroll-vertical 60s linear infinite;
+    animation-delay: -30s;
+  }
+
+  /* Screen reader only class */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Focus visible styles for accessibility */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
   }
 }

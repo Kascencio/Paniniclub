@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Bebas Neue', 'Arial Black', 'sans-serif'],
+        script: ['Dancing Script', 'Brush Script MT', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",

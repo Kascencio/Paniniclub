@@ -1,24 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Smartphone, MapPin, Clock } from "lucide-react";
+import { DELIVERY_APPS, CONTACT_INFO } from "@/config/constants";
 
 export const DeliverySection = () => {
-  const deliveryApps = [
-    {
-      name: "Uber Eats",
-      color: "bg-[#06C167]",
-      link: "#",
-    },
-    {
-      name: "Rappi",
-      color: "bg-[#FF441F]",
-      link: "#",
-    },
-    {
-      name: "DiDi Food",
-      color: "bg-[#FF6600]",
-      link: "#",
-    },
-  ];
 
   const benefits = [
     {
@@ -39,11 +23,11 @@ export const DeliverySection = () => {
   ];
 
   return (
-    <section id="ubicaciones" className="py-12 md:py-20 lg:py-32 bg-muted/20">
+    <section id="ubicaciones" className="py-12 md:py-20 lg:py-32 bg-muted/20" aria-labelledby="delivery-heading">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl mb-4 md:mb-6 text-foreground">
+          <h2 id="delivery-heading" className="font-display text-4xl md:text-6xl lg:text-7xl mb-4 md:mb-6 text-foreground">
             <span className="text-gradient">DELIVERY</span> A TU PUERTA
           </h2>
           <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
@@ -56,10 +40,10 @@ export const DeliverySection = () => {
           {benefits.map((benefit, index) => (
             <div
               key={benefit.title}
-              className="text-center animate-in fade-in duration-700"
+              className="text-center animate-on-scroll"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                 <benefit.icon className="w-10 h-10 text-primary" />
               </div>
               <h3 className="font-display text-2xl mb-2 text-foreground">
@@ -76,18 +60,61 @@ export const DeliverySection = () => {
             <h3 className="font-display text-3xl md:text-4xl text-center mb-8 text-card-foreground">
               ORDENA AHORA EN:
             </h3>
-            <div className="flex flex-col md:flex-row gap-4 justify-center mb-8">
-              {deliveryApps.map((app) => (
-                <Button
+            <div className="flex flex-col md:flex-row gap-6 justify-center items-center mb-8">
+              {DELIVERY_APPS.map((app) => (
+                <a
                   key={app.name}
-                  size="lg"
-                  className={`${app.color} hover:opacity-90 text-white font-display text-xl h-16 px-12 hover-lift`}
-                  asChild
+                  href={app.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-white hover:shadow-2xl transition-all duration-300 hover-lift min-w-[200px] border-2 border-transparent hover:border-primary/20"
+                  aria-label={`Ordenar en ${app.name}`}
                 >
-                  <a href={app.link} target="_blank" rel="noopener noreferrer">
-                    {app.name}
-                  </a>
-                </Button>
+                  <div className="mb-4 flex items-center justify-center h-20 w-full">
+                    {app.name === "Uber Eats" && (
+                      <img 
+                        src="/delivery/uber-eats.png" 
+                        alt="Uber Eats" 
+                        className="h-12 w-auto object-contain max-w-[180px]"
+                        loading="lazy"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          target.parentElement!.innerHTML = '<span class="text-2xl font-bold text-[#06C167]">Uber Eats</span>';
+                        }}
+                      />
+                    )}
+                    {app.name === "Rappi" && (
+                      <img 
+                        src="/delivery/rappi.png" 
+                        alt="Rappi" 
+                        className="h-12 w-auto object-contain max-w-[180px]"
+                        loading="lazy"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          target.parentElement!.innerHTML = '<span class="text-2xl font-bold bg-[#FF441F] text-white px-4 py-2 rounded-lg">Rappi</span>';
+                        }}
+                      />
+                    )}
+                    {app.name === "DiDi Food" && (
+                      <img 
+                        src="/delivery/didi-food.png" 
+                        alt="DiDi Food" 
+                        className="h-12 w-auto object-contain max-w-[180px]"
+                        loading="lazy"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          target.parentElement!.innerHTML = '<span class="text-xl font-bold bg-[#FF6600] text-white px-4 py-2 rounded-lg">DiDi Food</span>';
+                        }}
+                      />
+                    )}
+                  </div>
+                  <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors font-medium">
+                    Ordenar ahora
+                  </span>
+                </a>
               ))}
             </div>
             <div className="text-center">
@@ -95,37 +122,17 @@ export const DeliverySection = () => {
                 O llámanos directamente para ordenar por teléfono
               </p>
               <a
-                href="tel:+525512345678"
+                href={`tel:${CONTACT_INFO.phoneFormatted}`}
                 className="font-display text-3xl text-primary hover:text-primary/80 transition-colors"
+                aria-label={`Llamar al ${CONTACT_INFO.phone} para servicio a domicilio`}
               >
-                55.1234.5678
+                {CONTACT_INFO.phone}
               </a>
+              <p className="text-sm text-card-foreground/60 mt-2">
+                Servicio a domicilio disponible
+              </p>
             </div>
           </div>
-        </div>
-
-        {/* Locations Preview */}
-        <div className="mt-16 text-center">
-          <h3 className="font-display text-3xl md:text-4xl mb-6 text-foreground">
-            NUESTRAS UBICACIONES
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
-            {[
-              { name: "Polanco", address: "Av. Presidente Masaryk 123" },
-              { name: "Roma Norte", address: "Calle Orizaba 45" },
-              { name: "Condesa", address: "Av. Amsterdam 67" },
-            ].map((location) => (
-              <div key={location.name} className="bg-card rounded-xl p-6 shadow-md hover-lift">
-                <h4 className="font-display text-xl text-card-foreground mb-2">
-                  {location.name}
-                </h4>
-                <p className="text-card-foreground/80 text-sm">{location.address}</p>
-              </div>
-            ))}
-          </div>
-          <Button size="lg" variant="outline" className="font-display text-lg border-2">
-            VER TODAS LAS SUCURSALES
-          </Button>
         </div>
       </div>
     </section>
