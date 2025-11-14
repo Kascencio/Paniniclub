@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
@@ -25,12 +25,60 @@ export const Hero = () => {
     return entries.map(([, url]) => url);
   }, []);
 
+  // Pre-carga y cambio suave de imágenes para mejorar estabilidad en producción
+  const currentIndexRef = useRef(0);
+
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+
   useEffect(() => {
     if (!slides || slides.length === 0) return;
-    const id = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % slides.length);
-    }, 4000); // 4s por slide
-    return () => clearInterval(id);
+
+    let isActive = true;
+    let timeoutId: number | undefined;
+
+    const preloadImage = (url: string) => {
+      return new Promise<void>((resolve) => {
+        const img = new Image();
+        img.src = url;
+        if (typeof (img as any).decode === "function") {
+          (img as any)
+            .decode()
+            .then(() => resolve())
+            .catch(() => resolve());
+        } else {
+          img.onload = () => resolve();
+          img.onerror = () => resolve();
+        }
+      });
+    };
+
+    const scheduleNext = async () => {
+      // Espera 4s antes de intentar avanzar
+      timeoutId = window.setTimeout(async () => {
+        if (!isActive || slides.length === 0) return;
+        const next = (currentIndexRef.current + 1) % slides.length;
+        try {
+          await preloadImage(slides[next]);
+        } catch {
+          // Ignorar errores de pre-carga
+        }
+        if (!isActive) return;
+        setCurrentIndex(next);
+        currentIndexRef.current = next;
+        scheduleNext();
+      }, 4000);
+    };
+
+    scheduleNext();
+
+    return () => {
+      isActive = false;
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [slides]);
 
   const scrollToSection = useSmoothScroll();
