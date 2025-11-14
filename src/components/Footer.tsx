@@ -1,7 +1,6 @@
 import { Logo } from "@/components/Logo";
 import { SocialLinks } from "@/components/SocialLinks";
-import { LocationCard } from "@/components/LocationCard";
-import { LOCATIONS, CONTACT_INFO } from "@/config/constants";
+import { CONTACT_INFO } from "@/config/constants";
 
 export const Footer = () => {
   return (
@@ -12,16 +11,19 @@ export const Footer = () => {
           <div className="flex flex-col items-center justify-center gap-2 md:gap-3 mb-3 md:mb-4">
             <Logo size="lg" />
           </div>
-          <p className="text-muted-foreground text-base md:text-lg">
-            La mejor experiencia en paninis artesanales desde {CONTACT_INFO.established}
-          </p>
+          <p className="text-muted-foreground text-base md:text-lg">La mejor experiencia en paninis artesanales desde {CONTACT_INFO.established}</p>
         </div>
 
-        {/* Locations Grid */}
-        <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12 max-w-6xl mx-auto">
-          {LOCATIONS.map((location) => (
-            <LocationCard key={location.name} location={location} variant="detailed" />
-          ))}
+        {/* Contact Email */}
+        <div className="text-center mb-8 md:mb-12">
+          <h3 className="font-display text-2xl md:text-3xl text-foreground mb-3">Contacto</h3>
+          <a
+            href={`mailto:${CONTACT_INFO.email}`}
+            className="font-display text-xl md:text-2xl text-primary hover:text-primary/80 transition-colors"
+            aria-label={`Enviar email a ${CONTACT_INFO.email}`}
+          >
+            {CONTACT_INFO.email}
+          </a>
         </div>
 
         {/* Social Media & Bottom Bar */}

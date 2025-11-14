@@ -4,7 +4,7 @@ export const CONTACT_INFO = {
   phone: "993 318 4832",
   phoneFormatted: "+529933184832",
   phoneWhatsApp: "9933184832",
-  email: "",
+  email: "paniniclubtab@gmail.com",
   website: "https://paniniclub.mx",
   established: "2014",
   tagline: "FRESH AND HANDMADE",
@@ -50,6 +50,11 @@ export const LOCATIONS = [
     phone: "993 318 4832",
     hours: "12:30 PM - 11:30 PM",
     mapUrl: "https://maps.app.goo.gl/YYrpRd1jRzyDfMtM7",
+    deliveryLinks: {
+      uber: "https://www.ubereats.com/mx/store/panini-club-petrolera/EXAMPLE",
+      rappi: "https://www.rappi.com.mx/tiendas/panini-club-petrolera",
+      didi: "https://page.didi-food.com/mx/restaurant/panini-club-petrolera",
+    },
   },
   {
     name: "Antojeria Food Park",
@@ -57,6 +62,11 @@ export const LOCATIONS = [
     phone: "993 450 1624",
     hours: "4:30 PM - 11:30 PM",
     mapUrl: "https://maps.app.goo.gl/ygEQWSB84Mx2o3s98",
+    deliveryLinks: {
+      uber: "https://www.ubereats.com/mx/store/panini-club-antojeria/EXAMPLE",
+      rappi: "https://www.rappi.com.mx/tiendas/panini-club-antojeria",
+      didi: "https://page.didi-food.com/mx/restaurant/panini-club-antojeria",
+    },
   },
   {
     name: "Deportiva",
@@ -64,6 +74,11 @@ export const LOCATIONS = [
     phone: "993 703 2822",
     hours: "2:30 PM - 11:30 PM",
     mapUrl: "https://maps.app.goo.gl/P58qwjFNKkXNhfFu7",
+    deliveryLinks: {
+      uber: "https://www.ubereats.com/mx/store/panini-club-deportiva/EXAMPLE",
+      rappi: "https://www.rappi.com.mx/tiendas/panini-club-deportiva",
+      didi: "https://page.didi-food.com/mx/restaurant/panini-club-deportiva",
+    },
   },
 ] as const;
 

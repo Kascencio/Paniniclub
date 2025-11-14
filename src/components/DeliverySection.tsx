@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { Smartphone, MapPin, Clock } from "lucide-react";
-import { DELIVERY_APPS, CONTACT_INFO } from "@/config/constants";
+import { LOCATIONS } from "@/config/constants";
+import { LocationCard } from "@/components/LocationCard";
 
 export const DeliverySection = () => {
 
@@ -33,6 +33,59 @@ export const DeliverySection = () => {
           <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Disfruta de nuestros paninis sin salir de casa. Ordena ahora a través de tus apps favoritas.
           </p>
+          <div className="flex justify-center items-center gap-6 md:gap-10 mt-6">
+            <div className="flex items-center justify-center h-10 md:h-12 min-w-[120px]">
+              <img
+                src="/delivery/uber-eats.png"
+                alt="Uber Eats"
+                className="h-8 md:h-10 w-auto object-contain"
+                loading="lazy"
+                decoding="async"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = "none";
+                  if (target.parentElement) {
+                    target.parentElement.innerHTML =
+                      '<span class="text-lg md:text-xl font-bold text-[#06C167]">Uber Eats</span>';
+                  }
+                }}
+              />
+            </div>
+            <div className="flex items-center justify-center h-10 md:h-12 min-w-[120px]">
+              <img
+                src="/delivery/rappi.png"
+                alt="Rappi"
+                className="h-8 md:h-10 w-auto object-contain"
+                loading="lazy"
+                decoding="async"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = "none";
+                  if (target.parentElement) {
+                    target.parentElement.innerHTML =
+                      '<span class="text-base md:text-lg font-bold bg-[#FF441F] text-white px-3 py-1 rounded-lg">Rappi</span>';
+                  }
+                }}
+              />
+            </div>
+            <div className="flex items-center justify-center h-10 md:h-12 min-w-[120px]">
+              <img
+                src="/delivery/didi-food.png"
+                alt="DiDi Food"
+                className="h-8 md:h-10 w-auto object-contain"
+                loading="lazy"
+                decoding="async"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = "none";
+                  if (target.parentElement) {
+                    target.parentElement.innerHTML =
+                      '<span class="text-base md:text-lg font-bold bg-[#FF6600] text-white px-3 py-1 rounded-lg">DiDi Food</span>';
+                  }
+                }}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Benefits */}
@@ -54,85 +107,11 @@ export const DeliverySection = () => {
           ))}
         </div>
 
-        {/* Delivery Apps CTA */}
-        <div className="bg-card rounded-3xl p-8 md:p-12 shadow-2xl">
-          <div className="max-w-4xl mx-auto">
-            <h3 className="font-display text-3xl md:text-4xl text-center mb-8 text-card-foreground">
-              ORDENA AHORA EN:
-            </h3>
-            <div className="flex flex-col md:flex-row gap-6 justify-center items-center mb-8">
-              {DELIVERY_APPS.map((app) => (
-                <a
-                  key={app.name}
-                  href={app.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-white hover:shadow-2xl transition-all duration-300 hover-lift min-w-[200px] border-2 border-transparent hover:border-primary/20"
-                  aria-label={`Ordenar en ${app.name}`}
-                >
-                  <div className="mb-4 flex items-center justify-center h-20 w-full">
-                    {app.name === "Uber Eats" && (
-                      <img 
-                        src="/delivery/uber-eats.png" 
-                        alt="Uber Eats" 
-                        className="h-12 w-auto object-contain max-w-[180px]"
-                        loading="lazy"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          target.parentElement!.innerHTML = '<span class="text-2xl font-bold text-[#06C167]">Uber Eats</span>';
-                        }}
-                      />
-                    )}
-                    {app.name === "Rappi" && (
-                      <img 
-                        src="/delivery/rappi.png" 
-                        alt="Rappi" 
-                        className="h-12 w-auto object-contain max-w-[180px]"
-                        loading="lazy"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          target.parentElement!.innerHTML = '<span class="text-2xl font-bold bg-[#FF441F] text-white px-4 py-2 rounded-lg">Rappi</span>';
-                        }}
-                      />
-                    )}
-                    {app.name === "DiDi Food" && (
-                      <img 
-                        src="/delivery/didi-food.png" 
-                        alt="DiDi Food" 
-                        className="h-12 w-auto object-contain max-w-[180px]"
-                        loading="lazy"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          target.parentElement!.innerHTML = '<span class="text-xl font-bold bg-[#FF6600] text-white px-4 py-2 rounded-lg">DiDi Food</span>';
-                        }}
-                      />
-                    )}
-                  </div>
-                  <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors font-medium">
-                    Ordenar ahora
-                  </span>
-                </a>
-              ))}
-            </div>
-            <div className="text-center">
-              <p className="text-card-foreground/80 mb-4">
-                O llámanos directamente para ordenar por teléfono
-              </p>
-              <a
-                href={`tel:${CONTACT_INFO.phoneFormatted}`}
-                className="font-display text-3xl text-primary hover:text-primary/80 transition-colors"
-                aria-label={`Llamar al ${CONTACT_INFO.phone} para servicio a domicilio`}
-              >
-                {CONTACT_INFO.phone}
-              </a>
-              <p className="text-sm text-card-foreground/60 mt-2">
-                Servicio a domicilio disponible
-              </p>
-            </div>
-          </div>
+        {/* Ubicaciones y pedidos por sucursal */}
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-4 md:mb-8 max-w-6xl mx-auto">
+          {LOCATIONS.map((location) => (
+            <LocationCard key={location.name} location={location as any} variant="detailed" />
+          ))}
         </div>
       </div>
     </section>

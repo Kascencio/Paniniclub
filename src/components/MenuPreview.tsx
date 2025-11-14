@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
+import menuBg from "@/assets/images/slider/imagen5.jpg";
 // Imágenes del menú (usar exactamente los nombres en src/assets/images/menu)
 import BOSTON from "@/assets/images/menu/BOSTON.png";
 import LYON from "@/assets/images/menu/LYON.png";
@@ -35,6 +37,9 @@ export const MenuPreview = () => {
   } | null>(null);
 
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [accordionValue, setAccordionValue] = useState<string | undefined>(undefined);
+
+  // Fondo fijo con imagen única y degradado fuerte
 
   const categories = [
     { name: "all", label: "Todo", count: 18 },
@@ -43,6 +48,14 @@ export const MenuPreview = () => {
     { name: "pitas", label: "Wraps", count: 5 },
     { name: "ensaladas", label: "Ensaladas", count: 2 },
   ];
+
+  useEffect(() => {
+    if (activeCategory === "all") {
+      setAccordionValue(undefined);
+    } else {
+      setAccordionValue(activeCategory);
+    }
+  }, [activeCategory]);
 
   const menuItems = {
     paninis: [
@@ -254,13 +267,35 @@ export const MenuPreview = () => {
       </Dialog>
 
       <section id="menu" className="py-12 md:py-20 lg:py-32 bg-background relative overflow-hidden" aria-labelledby="menu-heading">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0" aria-hidden="true">
+          <img
+            src={menuBg}
+            alt="Fondo del menú - Panini Club"
+            className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            sizes="100vw"
+            width="1920"
+            height="1080"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/70" />
+        </div>
+
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-[0.03] pattern-panini" aria-hidden="true" />
         <div className="container mx-auto px-4 relative z-10">
           {/* Header */}
           <div className="text-center mb-12 md:mb-16">
             <h2 id="menu-heading" className="font-display text-4xl md:text-6xl lg:text-7xl mb-4 md:mb-6 text-foreground">
-              NUESTRO <span className="text-gradient">MENÚ</span>
+              NUESTRO{" "}
+              <span className="relative inline-block">
+                <span
+                  aria-hidden="true"
+                  className="absolute -inset-1 md:-inset-2 bg-primary/20 rounded-lg blur-sm"
+                />
+                <span className="relative text-gradient">MENÚ</span>
+              </span>
             </h2>
             <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
               Explora nuestra selección de paninis artesanales, cada uno preparado con amor y los mejores ingredientes.
@@ -294,280 +329,303 @@ export const MenuPreview = () => {
           </div>
 
           {/* Menu Sections */}
-          <div className="space-y-12 md:space-y-20 mb-12 md:mb-16">
-            {/* Paninis */}
-            {(activeCategory === "all" || activeCategory === "paninis") && (
-            <div id="category-paninis" role="tabpanel" aria-labelledby="category-paninis">
-              <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-center mb-2 md:mb-4 text-foreground">
-                <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Panini</span>
-                <span className="text-muted-foreground text-xl md:text-2xl"> (en focaccia)</span>
-              </h3>
-              <p className="text-center text-muted-foreground mb-6 md:mb-10 text-sm md:text-base">Focaccia de arándano, tocino u orégano</p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                {menuItems.paninis.map((item, index) => (
-                  <div
-                    key={item.name}
-                    onClick={() => setSelectedItem({ ...item, category: "Panini en Focaccia" })}
-                    className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700 cursor-pointer"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`Ver detalles de ${item.name} - $${item.price}`}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setSelectedItem({ ...item, category: "Panini en Focaccia" });
-                      }
-                    }}
-                  >
-                    <div className="relative overflow-hidden group">
-                      <img 
-                        src={item.image} 
-                        alt={`${item.name} - ${item.description}`}
-                        className="w-full h-40 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                        loading="lazy"
-                        decoding="async"
-                        width="400"
-                        height="300"
-                      />
-                      <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" />
-                    </div>
-                    <div className="p-4 md:p-6">
-                      <div className="flex items-start justify-between mb-2 md:mb-3">
-                        <h4 className="font-display text-xl md:text-2xl text-card-foreground">{item.name}</h4>
-                        {item.badge && (
-                          <Badge
-                            variant="secondary"
-                            className={
-                              item.badge === "Vegetariano"
-                                ? "bg-accent/20 text-accent border-accent/30 text-xs"
-                                : item.badge === "Popular"
-                                ? "bg-primary/20 text-primary border-primary/30 text-xs"
-                                : item.badge === "Picoso"
-                                ? "bg-red-500/20 text-red-500 border-red-500/30 text-xs"
-                                : "text-xs"
+          <div className="mb-12 md:mb-16">
+            <Accordion
+              type="single"
+              collapsible
+              value={accordionValue}
+              onValueChange={(val) => setAccordionValue(val || undefined)}
+            >
+              {(activeCategory === "all" || activeCategory === "paninis") && (
+                <AccordionItem value="paninis" className="border-border">
+                  <AccordionTrigger className="px-2">
+                    <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-center w-full text-foreground">
+                      <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Panini</span>
+                      <span className="text-muted-foreground text-xl md:text-2xl"> (en focaccia)</span>
+                    </h3>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-center text-muted-foreground mb-6 md:mb-10 text-sm md:text-base">Focaccia de arándano, tocino u orégano</p>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                      {menuItems.paninis.map((item, index) => (
+                        <div
+                          key={item.name}
+                          onClick={() => setSelectedItem({ ...item, category: "Panini en Focaccia" })}
+                          className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700 cursor-pointer"
+                          style={{ animationDelay: `${index * 50}ms` }}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`Ver detalles de ${item.name} - $${item.price}`}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              setSelectedItem({ ...item, category: "Panini en Focaccia" });
                             }
-                          >
-                            {item.badge}
-                          </Badge>
-                        )}
-                      </div>
-                      <p className="text-card-foreground/70 text-xs md:text-sm line-clamp-2 mb-3">{item.description}</p>
-                      {item.price && (
-                        <div className="flex items-center gap-2">
-                          <span className="font-display text-2xl text-primary font-bold">
-                            ${item.price}
-                          </span>
-                          <span className="text-xs text-muted-foreground">IVA incl.</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            )}
-
-            {/* Pepitos */}
-            {(activeCategory === "all" || activeCategory === "pepitos") && (
-            <div id="category-pepitos" role="tabpanel" aria-labelledby="category-pepitos">
-              <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-center mb-2 md:mb-4 text-foreground">
-                <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Pepitos</span>
-                <span className="text-muted-foreground text-xl md:text-2xl"> (tortas con pan de la casa)</span>
-              </h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
-                {menuItems.pepitos.map((item, index) => (
-                  <div
-                    key={item.name}
-                    onClick={() => setSelectedItem({ ...item, category: "Pepito (Torta)" })}
-                    className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700 cursor-pointer"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`Ver detalles de ${item.name}${item.price ? ` - $${item.price}` : ''}`}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setSelectedItem({ ...item, category: "Pepito (Torta)" });
-                      }
-                    }}
-                  >
-                    <div className="relative overflow-hidden group">
-                      <img 
-                        src={item.image} 
-                        alt={`${item.name} - ${item.description}`}
-                        className="w-full h-40 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                        loading="lazy"
-                        decoding="async"
-                        width="400"
-                        height="300"
-                      />
-                      <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" />
-                    </div>
-                    <div className="p-4 md:p-6">
-                      <div className="flex items-start justify-between mb-2 md:mb-3">
-                        <h4 className="font-display text-xl md:text-2xl text-card-foreground">{item.name}</h4>
-                        {item.badge && (
-                          <Badge
-                            variant="secondary"
-                            className={item.badge === "Intenso" ? "bg-primary/20 text-primary border-primary/30 text-xs" : "text-xs"}
-                          >
-                            {item.badge}
-                          </Badge>
-                        )}
-                      </div>
-                      <p className="text-card-foreground/70 text-xs md:text-sm line-clamp-2 mb-3">{item.description}</p>
-                      {item.price && (
-                        <div className="flex items-center gap-2">
-                          <span className="font-display text-2xl text-primary font-bold">
-                            ${item.price}
-                          </span>
-                          <span className="text-xs text-muted-foreground">IVA incl.</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            )}
-
-            {/* Pitas */}
-            {(activeCategory === "all" || activeCategory === "pitas") && (
-            <div id="category-pitas" role="tabpanel" aria-labelledby="category-pitas">
-              <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-center mb-2 md:mb-4 text-foreground">
-                <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Wraps</span>
-                <span className="text-muted-foreground text-xl md:text-2xl"> (pan pita)</span>
-              </h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                {menuItems.pitas.map((item, index) => (
-                  <div
-                    key={item.name}
-                    onClick={() => setSelectedItem({ ...item, category: "Pita (Wrap)" })}
-                    className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700 cursor-pointer"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`Ver detalles de ${item.name}${item.price ? ` - $${item.price}` : ''}`}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setSelectedItem({ ...item, category: "Pita (Wrap)" });
-                      }
-                    }}
-                  >
-                    <div className="relative overflow-hidden group">
-                      <img 
-                        src={item.image} 
-                        alt={`${item.name} - ${item.description}`}
-                        className="w-full h-40 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                        loading="lazy"
-                        decoding="async"
-                        width="400"
-                        height="300"
-                      />
-                      <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" />
-                    </div>
-                    <div className="p-4 md:p-6">
-                      <div className="flex items-start justify-between mb-2 md:mb-3">
-                        <h4 className="font-display text-xl md:text-2xl text-card-foreground">{item.name}</h4>
-                        {item.badge && (
-                          <Badge
-                            variant="secondary"
-                            className={
-                              item.badge === "Vegetariano"
-                                ? "bg-accent/20 text-accent border-accent/30 text-xs"
-                                : item.badge === "Picoso"
-                                ? "bg-red-500/20 text-red-500 border-red-500/30 text-xs"
-                                : item.badge === "Dulce"
-                                ? "bg-amber-500/20 text-amber-500 border-amber-500/30 text-xs"
-                                : "text-xs"
-                            }
-                          >
-                            {item.badge}
-                          </Badge>
-                        )}
-                      </div>
-                      <p className="text-card-foreground/70 text-xs md:text-sm line-clamp-2 mb-3">{item.description}</p>
-                      {item.price && (
-                        <div className="flex items-center gap-2">
-                          <span className="font-display text-2xl text-primary font-bold">
-                            ${item.price}
-                          </span>
-                          <span className="text-xs text-muted-foreground">IVA incl.</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            )}
-
-            {/* Ensaladas */}
-            {(activeCategory === "all" || activeCategory === "ensaladas") && (
-            <div id="category-ensaladas" role="tabpanel" aria-labelledby="category-ensaladas">
-              <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-center mb-6 md:mb-10 text-foreground">
-                <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Ensaladas</span>
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
-                {menuItems.ensaladas.map((item, index) => (
-                  <div
-                    key={item.name}
-                    onClick={() => setSelectedItem({ ...item, category: "Ensalada" })}
-                    className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700 cursor-pointer"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`Ver detalles de ${item.name}${item.price ? ` - $${item.price}` : ''}`}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setSelectedItem({ ...item, category: "Ensalada" });
-                      }
-                    }}
-                  >
-                    <div className="relative overflow-hidden group">
-                      <img 
-                        src={item.image} 
-                        alt={`${item.name} - ${item.description}`}
-                        className="w-full h-48 md:h-56 object-cover transition-transform duration-300 group-hover:scale-110"
-                        loading="lazy"
-                        decoding="async"
-                        width="500"
-                        height="400"
-                      />
-                      <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" />
-                    </div>
-                    <div className="p-4 md:p-8">
-                      <div className="flex items-start justify-between mb-3 md:mb-4">
-                        <h4 className="font-display text-2xl md:text-3xl text-card-foreground">{item.name}</h4>
-                        <Badge
-                          variant="secondary"
-                          className={
-                            item.badge === "Favorita"
-                              ? "bg-primary/20 text-primary border-primary/30 text-xs"
-                              : "bg-accent/20 text-accent border-accent/30 text-xs"
-                          }
+                          }}
                         >
-                          {item.badge}
-                        </Badge>
-                      </div>
-                      <p className="text-card-foreground/70 text-sm md:text-base mb-4">{item.description}</p>
-                      {item.price && (
-                        <div className="flex items-center gap-2">
-                          <span className="font-display text-3xl text-primary font-bold">
-                            ${item.price}
-                          </span>
-                          <span className="text-sm text-muted-foreground">IVA incl.</span>
+                          <div className="relative overflow-hidden group">
+                      <img 
+                              src={item.image} 
+                              alt={`${item.name} - ${item.description}`}
+                        className="w-full h-40 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                              loading="lazy"
+                              decoding="async"
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                              width="400"
+                              height="300"
+                            />
+                            <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" />
+                          </div>
+                          <div className="p-4 md:p-6">
+                            <div className="flex items-start justify-between mb-2 md:mb-3">
+                              <h4 className="font-display text-xl md:text-2xl text-card-foreground">{item.name}</h4>
+                              {item.badge && (
+                                <Badge
+                                  variant="secondary"
+                                  className={
+                                    item.badge === "Vegetariano"
+                                      ? "bg-accent/20 text-accent border-accent/30 text-xs"
+                                      : item.badge === "Popular"
+                                      ? "bg-primary/20 text-primary border-primary/30 text-xs"
+                                      : item.badge === "Picoso"
+                                      ? "bg-red-500/20 text-red-500 border-red-500/30 text-xs"
+                                      : "text-xs"
+                                  }
+                                >
+                                  {item.badge}
+                                </Badge>
+                              )}
+                            </div>
+                            <p className="text-card-foreground/70 text-xs md:text-sm line-clamp-2 mb-3">{item.description}</p>
+                            {item.price && (
+                              <div className="flex items-center gap-2">
+                                <span className="font-display text-2xl text-primary font-bold">
+                                  ${item.price}
+                                </span>
+                                <span className="text-xs text-muted-foreground">IVA incl.</span>
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      )}
+                      ))}
                     </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            )}
+                  </AccordionContent>
+                </AccordionItem>
+              )}
+
+              {(activeCategory === "all" || activeCategory === "pepitos") && (
+                <AccordionItem value="pepitos" className="border-border">
+                  <AccordionTrigger className="px-2">
+                    <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-center w-full text-foreground">
+                      <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Pepitos</span>
+                      <span className="text-muted-foreground text-xl md:text-2xl"> (tortas con pan de la casa)</span>
+                    </h3>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
+                      {menuItems.pepitos.map((item, index) => (
+                        <div
+                          key={item.name}
+                          onClick={() => setSelectedItem({ ...item, category: "Pepito (Torta)" })}
+                          className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700 cursor-pointer"
+                          style={{ animationDelay: `${index * 50}ms` }}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`Ver detalles de ${item.name}${item.price ? ` - $${item.price}` : ''}`}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              setSelectedItem({ ...item, category: "Pepito (Torta)" });
+                            }
+                          }}
+                        >
+                          <div className="relative overflow-hidden group">
+                      <img 
+                              src={item.image} 
+                              alt={`${item.name} - ${item.description}`}
+                        className="w-full h-40 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                              loading="lazy"
+                              decoding="async"
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                              width="400"
+                              height="300"
+                            />
+                            <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" />
+                          </div>
+                          <div className="p-4 md:p-6">
+                            <div className="flex items-start justify-between mb-2 md:mb-3">
+                              <h4 className="font-display text-xl md:text-2xl text-card-foreground">{item.name}</h4>
+                              {item.badge && (
+                                <Badge
+                                  variant="secondary"
+                                  className={item.badge === "Intenso" ? "bg-primary/20 text-primary border-primary/30 text-xs" : "text-xs"}
+                                >
+                                  {item.badge}
+                                </Badge>
+                              )}
+                            </div>
+                            <p className="text-card-foreground/70 text-xs md:text-sm line-clamp-2 mb-3">{item.description}</p>
+                            {item.price && (
+                              <div className="flex items-center gap-2">
+                                <span className="font-display text-2xl text-primary font-bold">
+                                  ${item.price}
+                                </span>
+                                <span className="text-xs text-muted-foreground">IVA incl.</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              )}
+
+              {(activeCategory === "all" || activeCategory === "pitas") && (
+                <AccordionItem value="pitas" className="border-border">
+                  <AccordionTrigger className="px-2">
+                    <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-center w-full text-foreground">
+                      <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Wraps</span>
+                      <span className="text-muted-foreground text-xl md:text-2xl"> (pan pita)</span>
+                    </h3>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                      {menuItems.pitas.map((item, index) => (
+                        <div
+                          key={item.name}
+                          onClick={() => setSelectedItem({ ...item, category: "Pita (Wrap)" })}
+                          className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700 cursor-pointer"
+                          style={{ animationDelay: `${index * 50}ms` }}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`Ver detalles de ${item.name}${item.price ? ` - $${item.price}` : ''}`}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              setSelectedItem({ ...item, category: "Pita (Wrap)" });
+                            }
+                          }}
+                        >
+                          <div className="relative overflow-hidden group">
+                      <img 
+                              src={item.image} 
+                              alt={`${item.name} - ${item.description}`}
+                        className="w-full h-40 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                              loading="lazy"
+                              decoding="async"
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                              width="400"
+                              height="300"
+                            />
+                            <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" />
+                          </div>
+                          <div className="p-4 md:p-6">
+                            <div className="flex items-start justify-between mb-2 md:mb-3">
+                              <h4 className="font-display text-xl md:text-2xl text-card-foreground">{item.name}</h4>
+                              {item.badge && (
+                                <Badge
+                                  variant="secondary"
+                                  className={
+                                    item.badge === "Vegetariano"
+                                      ? "bg-accent/20 text-accent border-accent/30 text-xs"
+                                      : item.badge === "Picoso"
+                                      ? "bg-red-500/20 text-red-500 border-red-500/30 text-xs"
+                                      : item.badge === "Dulce"
+                                      ? "bg-amber-500/20 text-amber-500 border-amber-500/30 text-xs"
+                                      : "text-xs"
+                                  }
+                                >
+                                  {item.badge}
+                                </Badge>
+                              )}
+                            </div>
+                            <p className="text-card-foreground/70 text-xs md:text-sm line-clamp-2 mb-3">{item.description}</p>
+                            {item.price && (
+                              <div className="flex items-center gap-2">
+                                <span className="font-display text-2xl text-primary font-bold">
+                                  ${item.price}
+                                </span>
+                                <span className="text-xs text-muted-foreground">IVA incl.</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              )}
+
+              {(activeCategory === "all" || activeCategory === "ensaladas") && (
+                <AccordionItem value="ensaladas" className="border-border">
+                  <AccordionTrigger className="px-2">
+                    <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-center w-full text-foreground">
+                      <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Ensaladas</span>
+                    </h3>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="grid md:grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
+                      {menuItems.ensaladas.map((item, index) => (
+                        <div
+                          key={item.name}
+                          onClick={() => setSelectedItem({ ...item, category: "Ensalada" })}
+                          className="bg-card rounded-2xl overflow-hidden hover-lift shadow-[var(--shadow-card)] animate-in fade-in duration-700 cursor-pointer"
+                          style={{ animationDelay: `${index * 50}ms` }}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`Ver detalles de ${item.name}${item.price ? ` - $${item.price}` : ''}`}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              setSelectedItem({ ...item, category: "Ensalada" });
+                            }
+                          }}
+                        >
+                          <div className="relative overflow-hidden group">
+                      <img 
+                              src={item.image} 
+                              alt={`${item.name} - ${item.description}`}
+                        className="w-full h-48 md:h-56 object-cover transition-transform duration-300 group-hover:scale-110"
+                              loading="lazy"
+                              decoding="async"
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                              width="500"
+                              height="400"
+                            />
+                            <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" />
+                          </div>
+                          <div className="p-4 md:p-8">
+                            <div className="flex items-start justify-between mb-3 md:mb-4">
+                              <h4 className="font-display text-2xl md:text-3xl text-card-foreground">{item.name}</h4>
+                              <Badge
+                                variant="secondary"
+                                className={
+                                  item.badge === "Favorita"
+                                    ? "bg-primary/20 text-primary border-primary/30 text-xs"
+                                    : "bg-accent/20 text-accent border-accent/30 text-xs"
+                                }
+                              >
+                                {item.badge}
+                              </Badge>
+                            </div>
+                            <p className="text-card-foreground/70 text-sm md:text-base mb-4">{item.description}</p>
+                            {item.price && (
+                              <div className="flex items-center gap-2">
+                                <span className="font-display text-3xl text-primary font-bold">
+                                  ${item.price}
+                                </span>
+                                <span className="text-sm text-muted-foreground">IVA incl.</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              )}
+            </Accordion>
           </div>
 
           {/* Legal Note */}

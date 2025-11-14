@@ -7,6 +7,11 @@ interface Location {
   phone?: string;
   hours?: string;
   mapUrl?: string;
+  deliveryLinks?: {
+    uber?: string;
+    rappi?: string;
+    didi?: string;
+  };
 }
 
 interface LocationCardProps {
@@ -82,6 +87,78 @@ export const LocationCard = ({ location, variant = "detailed", className = "" }:
 
       {/* Botones de acción */}
       <div className="mt-6 pt-4 border-t border-border space-y-3">
+        {/* Botones de apps de delivery por sucursal */}
+        {location.deliveryLinks && (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {location.deliveryLinks.uber && (
+              <Button asChild className="w-full font-display text-white bg-[#06C167] hover:bg-[#20BA5A]" size="lg">
+                <a
+                  href={location.deliveryLinks.uber}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Ordenar en Uber Eats - ${location.name}`}
+                >
+                  <img
+                    src="/delivery/uber-eats.png"
+                    alt="Uber Eats"
+                    className="h-5 w-auto mr-2"
+                    loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = "none";
+                    }}
+                  />
+                  <span className="font-semibold text-sm">Uber Eats</span>
+                </a>
+              </Button>
+            )}
+            {location.deliveryLinks.rappi && (
+              <Button asChild className="w-full font-display text-white bg-[#FF441F] hover:bg-[#E63D1C]" size="lg">
+                <a
+                  href={location.deliveryLinks.rappi}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Ordenar en Rappi - ${location.name}`}
+                >
+                  <img
+                    src="/delivery/rappi.png"
+                    alt="Rappi"
+                    className="h-5 w-auto mr-2"
+                    loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = "none";
+                    }}
+                  />
+                  <span className="font-semibold text-sm">Rappi</span>
+                </a>
+              </Button>
+            )}
+            {location.deliveryLinks.didi && (
+              <Button asChild className="w-full font-display text-white bg-[#FF6600] hover:bg-[#E65C00]" size="lg">
+                <a
+                  href={location.deliveryLinks.didi}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Ordenar en DiDi Food - ${location.name}`}
+                >
+                  <img
+                    src="/delivery/didi-food.png"
+                    alt="DiDi Food"
+                    className="h-5 w-auto mr-2"
+                    loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = "none";
+                    }}
+                  />
+                  <span className="font-semibold text-sm">DiDi Food</span>
+                </a>
+              </Button>
+            )}
+          </div>
+        )}
+
         {/* Botón WhatsApp - Ordenar ahora */}
         {location.phone && (
           <Button

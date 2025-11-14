@@ -47,6 +47,7 @@ export const Hero = () => {
           loading="eager"
           decoding="async"
           fetchPriority="high"
+          sizes="100vw"
           width="1920"
           height="1080"
         />
