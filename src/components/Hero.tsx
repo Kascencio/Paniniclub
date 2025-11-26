@@ -128,7 +128,7 @@ export const Hero = () => {
             <span className="text-foreground block font-display text-lg md:text-2xl tracking-[0.15em] md:tracking-[0.3em] uppercase mb-2 md:mb-4 opacity-90">
               SABOR ÚNICO EN VILLAHERMOSA
             </span>
-            <span className="text-primary font-display text-6xl sm:text-8xl md:text-9xl lg:text-[11rem] leading-[0.9] block tracking-tighter drop-shadow-2xl">
+            <span className="text-primary font-display text-5xl sm:text-8xl md:text-9xl lg:text-[11rem] leading-[0.9] block tracking-tighter drop-shadow-2xl">
               PANINI CLUB
             </span>
           </h1>

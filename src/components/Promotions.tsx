@@ -43,7 +43,7 @@ export const Promotions = () => {
           {promos.map((promo, index) => (
             <div
               key={promo.title}
-              className={`rounded-2xl p-8 hover-lift shadow-[var(--shadow-card)] relative overflow-hidden group animate-on-scroll ${
+              className={`rounded-2xl p-6 md:p-8 hover-lift shadow-[var(--shadow-card)] relative overflow-hidden group animate-on-scroll ${
                 promo.highlight 
                   ? "bg-primary text-background border-4 border-primary" 
                   : "bg-card"

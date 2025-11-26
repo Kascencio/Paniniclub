@@ -124,7 +124,7 @@ export const Testimonials = () => {
           <div className="absolute inset-0 z-10">
             <div className="absolute inset-0 animate-scroll-vertical" style={{ willChange: "transform" }}>
               {/* Primer grid (5x5) */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 lg:gap-8 px-1 sm:px-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 lg:gap-8 px-1 sm:px-2">
                 {visibleTestimonials.map((testimonial, index) => (
                   <Card
                     key={`${testimonial.name}-${index}`}
@@ -158,7 +158,7 @@ export const Testimonials = () => {
               </div>
               
               {/* Segundo grid (duplicado) */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 lg:gap-8 px-1 sm:px-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 lg:gap-8 px-1 sm:px-2">
                 {visibleTestimonials.map((testimonial, index) => (
                   <Card
                     key={`duplicate-${testimonial.name}-${index}`}

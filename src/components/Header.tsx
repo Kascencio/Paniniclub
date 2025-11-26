@@ -42,7 +42,7 @@ export const Header = () => {
       {/* Main Header */}
       <header
         className={`sticky transition-all duration-300 ${
-          isScrolled ? "top-0 bg-background/95 backdrop-blur-sm shadow-lg" : "top-[48px] bg-background"
+          isScrolled ? "top-0 bg-background/95 backdrop-blur-sm shadow-lg" : "top-0 md:top-[48px] bg-background"
         } z-40`}
         role="banner"
       >

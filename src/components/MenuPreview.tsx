@@ -339,14 +339,14 @@ export const MenuPreview = () => {
               {(activeCategory === "all" || activeCategory === "paninis") && (
                 <AccordionItem value="paninis" className="border-border">
                   <AccordionTrigger className="px-2 py-6">
-                    <h3 className="font-display text-5xl md:text-7xl lg:text-8xl text-center w-full text-foreground leading-tight">
-                      <span className="font-script text-6xl md:text-8xl lg:text-9xl text-primary block mb-2">Panini</span>
+                    <h3 className="font-display text-4xl md:text-7xl lg:text-8xl text-center w-full text-foreground leading-tight">
+                      <span className="font-script text-5xl md:text-8xl lg:text-9xl text-primary block mb-2">Panini</span>
                       <span className="text-muted-foreground text-xl md:text-3xl font-light block">en focaccia</span>
                     </h3>
                   </AccordionTrigger>
                   <AccordionContent>
                     <p className="text-center text-muted-foreground mb-8 md:mb-12 text-lg md:text-xl">Focaccia de arándano, tocino u orégano</p>
-                    <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
                       {menuItems.paninis.map((item, index) => (
                         <div
                           key={item.name}
@@ -422,7 +422,7 @@ export const MenuPreview = () => {
                     </h3>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
                       {menuItems.pepitos.map((item, index) => (
                         <div
                           key={item.name}
@@ -490,7 +490,7 @@ export const MenuPreview = () => {
                     </h3>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                       {menuItems.pitas.map((item, index) => (
                         <div
                           key={item.name}
@@ -565,7 +565,7 @@ export const MenuPreview = () => {
                     </h3>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="grid md:grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
                       {menuItems.ensaladas.map((item, index) => (
                         <div
                           key={item.name}
