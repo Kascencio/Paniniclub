@@ -36,7 +36,7 @@ export const LocationCard = ({ location, variant = "detailed", className = "" }:
   }
 
   return (
-    <div className={`bg-card rounded-2xl p-6 md:p-8 hover-lift shadow-[var(--shadow-card)] h-full flex flex-col ${className}`}>
+    <div className={`bg-card rounded-2xl p-5 md:p-8 hover-lift shadow-[var(--shadow-card)] h-full flex flex-col ${className}`}>
       <h3 className="font-display text-2xl md:text-3xl text-card-foreground mb-4 md:mb-6">
         {location.name}
       </h3>
@@ -89,7 +89,7 @@ export const LocationCard = ({ location, variant = "detailed", className = "" }:
       <div className="mt-6 pt-4 border-t border-border space-y-3">
         {/* Botones de apps de delivery por sucursal */}
         {location.deliveryLinks && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 gap-3">
             {location.deliveryLinks.uber && (
               <Button asChild className="w-full font-display text-white bg-[#06C167] hover:bg-[#20BA5A]" size="lg">
                 <a

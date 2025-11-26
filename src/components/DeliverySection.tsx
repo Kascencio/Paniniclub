@@ -33,7 +33,7 @@ export const DeliverySection = () => {
           <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Disfruta de nuestros paninis sin salir de casa. Ordena ahora a través de tus apps favoritas.
           </p>
-          <div className="flex justify-center items-center gap-6 md:gap-10 mt-6">
+          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 mt-6">
             <div className="flex items-center justify-center h-10 md:h-12 min-w-[120px]">
               <img
                 src="/delivery/uber-eats.png"
