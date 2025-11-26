@@ -32,22 +32,16 @@ export const Logo = ({ size = "md", showText = true, className = "" }: LogoProps
         decoding="async"
       />
       {showText && (
-        <div className="flex flex-col">
-          <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground" aria-label={`Establecido en ${CONTACT_INFO.established}`}>
-            <span>ESTB</span>
-            <span>{CONTACT_INFO.established}</span>
-          </div>
-          <span className={`font-display ${textSizes[size]} text-foreground leading-tight`}>
-            PANINI <span className="text-primary">CLUB</span>
-          </span>
-          <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider" aria-label={CONTACT_INFO.tagline}>
-            {CONTACT_INFO.tagline}
+        <div className="flex flex-col justify-center">
+          <span className={`font-display ${textSizes[size]} text-foreground leading-none tracking-wide`}>
+            PANINI<span className="text-primary font-bold">CLUB</span>
           </span>
         </div>
       )}
     </div>
   );
 };
+
 
 
 

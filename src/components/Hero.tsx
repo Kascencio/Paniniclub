@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import { CONTACT_INFO } from "@/config/constants";
-import heroImage from "@/assets/hero-panini.jpg";
+import heroImage from "@/assets/hero-panini.webp";
 
 export const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -107,55 +107,56 @@ export const Hero = () => {
       <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} aria-hidden="true" />
 
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl">
+      <div className="container mx-auto px-4 relative z-10 flex flex-col items-center text-center">
+        <div className="max-w-4xl">
           {/* Badge - Promoción Principal */}
-          <div className="inline-block mb-4 md:mb-6 animate-in fade-in slide-in-from-left-5 duration-700">
+          <div className="inline-block mb-6 md:mb-8 animate-in fade-in slide-in-from-bottom-5 duration-700">
             <a 
               href="#promociones"
-              className="bg-primary/20 text-primary px-4 md:px-6 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-semibold border-2 border-primary/50 hover:bg-primary/30 transition-colors inline-block"
+              className="bg-primary/20 text-primary px-6 md:px-8 py-2 rounded-full text-sm md:text-base font-semibold border border-primary/40 hover:bg-primary/30 transition-all hover:scale-105 inline-block backdrop-blur-sm"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection("promociones");
               }}
             >
-              🎉 3x2 MARTES - ¡Aprovecha la promoción!
+              ✨ 3x2 - VÁLIDO SOLO LOS MARTES
             </a>
           </div>
 
           {/* Main Title */}
-          <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-9xl mb-4 md:mb-6 leading-none animate-in fade-in slide-in-from-left-5 duration-700 delay-100">
-            <span className="text-foreground">EAT LIKE A</span>
-            <br />
-            <span className="text-primary font-script text-5xl sm:text-6xl md:text-8xl lg:text-[10rem]">REAL</span>
-            <br />
-            <span className="text-gradient font-script text-5xl sm:text-6xl md:text-8xl lg:text-[10rem]">Panininati</span>
+          <h1 className="mb-8 md:mb-12 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-100">
+            <span className="text-foreground block font-display text-lg md:text-2xl tracking-[0.15em] md:tracking-[0.3em] uppercase mb-2 md:mb-4 opacity-90">
+              SABOR ÚNICO EN VILLAHERMOSA
+            </span>
+            <span className="text-primary font-display text-6xl sm:text-8xl md:text-9xl lg:text-[11rem] leading-[0.9] block tracking-tighter drop-shadow-2xl">
+              PANINI CLUB
+            </span>
           </h1>
-          <span className="sr-only">Panini Club - La mejor experiencia en paninis artesanales desde 2014</span>
+          <span className="sr-only">Panini Club - Sabor único en Villahermosa</span>
 
           {/* Subtitle */}
-          <p className="text-base md:text-xl lg:text-2xl text-muted-foreground mb-6 md:mb-8 max-w-2xl animate-in fade-in slide-in-from-left-5 duration-700 delay-200">
-            Ingredientes <span className="text-primary font-semibold">{CONTACT_INFO.tagline}</span> desde {CONTACT_INFO.established}. 
-            Descubre por qué somos el club favorito de los amantes del buen comer.
+          <p className="text-lg md:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto font-light leading-relaxed animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
+            Disfruta de la <span className="text-primary font-medium">mejor calidad</span> y frescura en cada bocado. 
+            <br className="hidden md:block" />
+            La experiencia gastronómica que nos hace únicos.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-in fade-in slide-in-from-left-5 duration-700 delay-300">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-in fade-in slide-in-from-bottom-5 duration-700 delay-300">
             <Button 
               size="lg" 
-              className="text-base md:text-lg h-12 md:h-14 px-6 md:px-8 font-display shadow-[var(--shadow-glow)]"
+              className="text-lg h-14 px-10 font-display shadow-[var(--shadow-glow)] hover:scale-105 transition-transform"
               onClick={() => scrollToSection("menu")}
             >
               VER MENÚ
-              <ArrowRight className="ml-2 w-4 md:w-5 h-4 md:h-5" />
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              className="text-base md:text-lg h-12 md:h-14 px-6 md:px-8 font-display border-2 border-primary hover:bg-primary hover:text-background"
+              className="text-lg h-14 px-10 font-display border-2 border-primary/50 hover:border-primary hover:bg-primary/10 backdrop-blur-sm hover:scale-105 transition-all"
               onClick={() => scrollToSection("ubicaciones")}
             >
-              ¡PIDE A DOMICILIO!
+              PEDIR AHORA
             </Button>
           </div>
         </div>

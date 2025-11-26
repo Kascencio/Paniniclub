@@ -4,26 +4,26 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
-import menuBg from "@/assets/images/slider/imagen5.jpg";
+import menuBg from "@/assets/images/slider/imagen5.webp";
 // Imágenes del menú (usar exactamente los nombres en src/assets/images/menu)
-import BOSTON from "@/assets/images/menu/BOSTON.png";
-import LYON from "@/assets/images/menu/LYON.png";
-import BARCELONA from "@/assets/images/menu/BARCELONA.png";
-import MADAGASCAR from "@/assets/images/menu/MADAGASCAR.png";
-import NAPOLES from "@/assets/images/menu/NAPOLES.png";
-import TRES_QUESOS from "@/assets/images/menu/TRES QUESOS.png";
-import MONTERREY from "@/assets/images/menu/MONTERREY.png";
-import SONORA from "@/assets/images/menu/SONORA.png";
-import PEPITO_FILETE from "@/assets/images/menu/PEPITO-FILETE.png";
-import PEPITOCHIRIQUEZO from "@/assets/images/menu/PEPITOCHIRIQUEZO.png";
-import PEPITOJAMON from "@/assets/images/menu/PEPITOJAMON.png";
-import WRAPBUENOSAIRES from "@/assets/images/menu/WRAPBUENOSAIRES.png";
-import WRAPMEXICO from "@/assets/images/menu/WRAPMEXICO.png";
-import WRAPMONTREAL from "@/assets/images/menu/WRAPMONTREAL.png";
-import QUESAPITA from "@/assets/images/menu/QUESAPITA.png";
-import WRAPTEXAS from "@/assets/images/menu/WRAPTEXAS.png";
-import ENSALADACOBY from "@/assets/images/menu/ENSALADACOBY.png";
-import ENSALADAFRENCHY from "@/assets/images/menu/ENSALADAFRENCHY.png";
+import BOSTON from "@/assets/images/menu/BOSTON.webp";
+import LYON from "@/assets/images/menu/LYON.webp";
+import BARCELONA from "@/assets/images/menu/BARCELONA.webp";
+import MADAGASCAR from "@/assets/images/menu/MADAGASCAR.webp";
+import NAPOLES from "@/assets/images/menu/NAPOLES.webp";
+import TRES_QUESOS from "@/assets/images/menu/TRES QUESOS.webp";
+import MONTERREY from "@/assets/images/menu/MONTERREY.webp";
+import SONORA from "@/assets/images/menu/SONORA.webp";
+import PEPITO_FILETE from "@/assets/images/menu/PEPITO-FILETE.webp";
+import PEPITOCHIRIQUEZO from "@/assets/images/menu/PEPITOCHIRIQUEZO.webp";
+import PEPITOJAMON from "@/assets/images/menu/PEPITOJAMON.webp";
+import WRAPBUENOSAIRES from "@/assets/images/menu/WRAPBUENOSAIRES.webp";
+import WRAPMEXICO from "@/assets/images/menu/WRAPMEXICO.webp";
+import WRAPMONTREAL from "@/assets/images/menu/WRAPMONTREAL.webp";
+import QUESAPITA from "@/assets/images/menu/QUESAPITA.webp";
+import WRAPTEXAS from "@/assets/images/menu/WRAPTEXAS.webp";
+import ENSALADACOBY from "@/assets/images/menu/ENSALADACOBY.webp";
+import ENSALADAFRENCHY from "@/assets/images/menu/ENSALADAFRENCHY.webp";
 
 export const MenuPreview = () => {
   const scrollToSection = useSmoothScroll();
@@ -338,15 +338,15 @@ export const MenuPreview = () => {
             >
               {(activeCategory === "all" || activeCategory === "paninis") && (
                 <AccordionItem value="paninis" className="border-border">
-                  <AccordionTrigger className="px-2">
-                    <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-center w-full text-foreground">
-                      <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Panini</span>
-                      <span className="text-muted-foreground text-xl md:text-2xl"> (en focaccia)</span>
+                  <AccordionTrigger className="px-2 py-6">
+                    <h3 className="font-display text-5xl md:text-7xl lg:text-8xl text-center w-full text-foreground leading-tight">
+                      <span className="font-script text-6xl md:text-8xl lg:text-9xl text-primary block mb-2">Panini</span>
+                      <span className="text-muted-foreground text-xl md:text-3xl font-light block">en focaccia</span>
                     </h3>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <p className="text-center text-muted-foreground mb-6 md:mb-10 text-sm md:text-base">Focaccia de arándano, tocino u orégano</p>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    <p className="text-center text-muted-foreground mb-8 md:mb-12 text-lg md:text-xl">Focaccia de arándano, tocino u orégano</p>
+                    <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
                       {menuItems.paninis.map((item, index) => (
                         <div
                           key={item.name}
@@ -367,12 +367,12 @@ export const MenuPreview = () => {
                       <img 
                               src={item.image} 
                               alt={`${item.name} - ${item.description}`}
-                        className="w-full h-40 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                        className="w-full h-64 md:h-80 object-cover transition-transform duration-300 group-hover:scale-110"
                               loading="lazy"
                               decoding="async"
-                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                              width="400"
-                              height="300"
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                              width="600"
+                              height="450"
                             />
                             <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" />
                           </div>
@@ -417,8 +417,8 @@ export const MenuPreview = () => {
                 <AccordionItem value="pepitos" className="border-border">
                   <AccordionTrigger className="px-2">
                     <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-center w-full text-foreground">
-                      <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Pepitos</span>
-                      <span className="text-muted-foreground text-xl md:text-2xl"> (tortas con pan de la casa)</span>
+                      <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Pepitos</span> <br />
+                      <span className="text-muted-foreground text-xl md:text-2xl">tortas con pan de la casa</span>
                     </h3>
                   </AccordionTrigger>
                   <AccordionContent>
@@ -485,8 +485,8 @@ export const MenuPreview = () => {
                 <AccordionItem value="pitas" className="border-border">
                   <AccordionTrigger className="px-2">
                     <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-center w-full text-foreground">
-                      <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Wraps</span>
-                      <span className="text-muted-foreground text-xl md:text-2xl"> (pan pita)</span>
+                      <span className="font-script text-4xl md:text-5xl lg:text-6xl text-primary">Wraps</span> <br />
+                      <span className="text-muted-foreground text-xl md:text-2xl"> pan pita</span>
                     </h3>
                   </AccordionTrigger>
                   <AccordionContent>
