@@ -138,7 +138,7 @@ export const Hero = () => {
           <p className="text-lg md:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto font-light leading-relaxed animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
             Disfruta de la <span className="text-primary font-medium">mejor calidad</span> y frescura en cada bocado. 
             <br className="hidden md:block" />
-            La experiencia gastronómica que nos hace únicos.
+            <span> </span>La experiencia gastronómica que nos hace únicos.
           </p>
 
           {/* CTA Buttons */}
